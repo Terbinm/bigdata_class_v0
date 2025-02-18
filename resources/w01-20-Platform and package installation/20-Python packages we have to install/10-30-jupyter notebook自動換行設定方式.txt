@@ -1,0 +1,77 @@
+Jupyter lab的設定方式:
+Settings -> Advanced Settings Editor ->  Notebook -> User Preferences新增如下文字:
+
+{
+        "codeCellConfig": {
+        "lineWrap": "on"
+    }
+}
+
+存檔即可。
+
+
+
+以下其他設定方式，提供參考。
+--------------
+新增notebook.json於以下位置:
+~/.jupyter/nbconfig/notebook.json
+
+寫入notebook.json以下內容:
+---------------------------
+
+{
+  "MarkdownCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  },
+  "CodeCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  }
+}
+
+----------------
+
+
+** windows anoconda是在user目錄下，像是
+C:\Users\user\.jupyter\nbconfig
+
+
+
+**Ubuntu anaconda
+~/.jupyter/nbconfig/notebook.json
+
+
+
+**若你的jupyter是在docker容器內部:
+
+進入容器:
+docker exec -it spark22 bash
+
+(1)拷貝notebook.json檔案在使用者目錄下
+~/.jupyter/nbconfig/notebook.json
+
+使用以下mkdir 與 cp指令:
+mkdir ~/.jupyter
+mkdir ~/.jupyter/nbconfig/
+cp /from你的目錄/notebook.json   ~/.jupyter/nbconfig/
+
+
+(2)或是新增notebook.json檔案在使用者目錄下
+
+cd ~
+mkdir .jupyter
+cd .jupyter
+mkdir nbconfig
+cd nbconfig
+vim notebook.json
+
+ins鍵 i
+貼上上述文字 ctrl+shift+v
+
+Esc鍵
+:wq!  存檔並離開
+
+重新開啟容器
